@@ -278,7 +278,6 @@ break;
 		case "help":
 
 message.channel.send(`
-							const embed1 = new Discord.RichEmbed()
 
 #User
 **${prefix}userinfo** [Username or blank] : displays info for the selected user or for message sender if arguments are not provided
@@ -294,7 +293,6 @@ message.channel.send(`
 **${prefix}yt** [Search Term] : Searches The YouTube and Returns First 5 Results
 **${prefix}add** [Search Result Number] : adds a Song From YouTube Search To The Queue
 **${prefix}vol** [percentage] : Sets The Volume of The Music To Given Percentage
-		message.channel.send(embed1);
 
 `);
 
