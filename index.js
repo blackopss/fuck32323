@@ -115,7 +115,7 @@ getYouTubeResultsId(args, 1).then(ytResults => {
 	songsQueue.push(ytResults[0]);
 }).catch(error => console.log(error));
 		} else {
-message.reply("Sorry, Couldn't find The Song.");
+message.reply("**Sorry, Couldn't find The Song.**");
 		}
 	}).catch(error => console.log(error));
 } else {
@@ -125,11 +125,11 @@ message.reply("Sorry, Couldn't find The Song.");
 queue.push(id);
 playMusic(id, message);
 getYouTubeResultsId(args, 1).then(ytResults => {
-	message.reply(`Now Playing **${ytResults[0]}**:musical_note:`);
+	message.reply(`**Now Playing** **${ytResults[0]}**:musical_note:`);
 	songsQueue.push(ytResults[0]);
 }).catch(error => console.log(error));
 		} else {
-message.reply("Sorry, Couldn't Find The Song.");
+message.reply("**Sorry, Couldn't Find The Song.**");
 		}
 	}).catch(error => console.log(error));
 }
@@ -150,7 +150,7 @@ if (queue.length === 1) {
 skipSong(message);
 message.reply("**Your Skip has Been Added To The List. Skipping!**");
 		} else {
-message.reply(`Your Skip has Been Added to the list. You need **${Math.ceil((voiceChannel.members.size - 1) / 2) - skipRequest}** more to skip current song!`);
+message.reply(`**Your Skip has Been Added to the list. You need **${Math.ceil((voiceChannel.members.size - 1) / 2) - skipRequest}** more to skip current song!**`);
 		}
 	} else {
 		message.reply("**You Already Voted To Skip!**");
@@ -218,7 +218,7 @@ break;
 
 		case "yt":
 if (args.length == 0) {
-	message.reply(`you need to enter search term (${prefix} [search term]).`);
+	message.reply(`**you need to enter search term (${prefix} [search term]).**`);
 } else {
 	message.channel.send("```Searching youtube...```");
 	getYouTubeResultsId(args, 5).then(ytResults => {
@@ -232,7 +232,7 @@ if (args.length == 0) {
 .addField("4:", "```" + ytResults[3] + "```")
 .addField("5:", "```" + ytResults[4] + "```")
 .addBlankField()
-.setFooter("Send !add [result number] to queue the song.");
+.setFooter("**Send ${prefix}add [result number] to queue the song.**");
 		message.channel.send(ytEmbed);
 		youtubeSearched = true;
 	}).catch(err => console.log(err));
@@ -242,7 +242,7 @@ break;
 		case "add":
 if (youtubeSearched === true) {
 	if (!re.test(args)) {
-		message.reply("you entered the wrong song number or character. Please only enter 1-5 for song number to be queued.");
+		message.reply("**you entered the wrong song number or character. Please only enter 1-5 for song number to be queued.**");
 	} else {
 		let choice = ytResultAdd[args - 1];
 		getID(choice).then(id => {
@@ -263,74 +263,56 @@ break;
 
 		case "vol":
 if (args.length == 0 && dispatcher) {
-	message.reply(`current volume is ${dispatcher.volume}. Type !vol [percentage - 0 to 200] to set music volume.`);
+	message.reply(`**current volume is ${dispatcher.volume}. Type ${prefix}vol [percentage - 0 to 200] to set music volume.**`);
 } else if (args.length > 0 && regVol.test(args) == true && dispatcher) {
 	dispatcher.setVolume(args * 0.01);
-	message.reply(`music volume has been set to ${args}%.`);
+	message.reply(`**music volume has been set to ${args}%.**`);
 	console.log(dispatcher.volume);
 } else if (!regVol.test(args) && dispatcher) {
-	message.reply("you need to enter a number in 0-200 range.");
+	message.reply("**you need to enter a number in 0-200 range.**");
 } else {
-	message.reply("you can only set music volume if music is playing.");
+	message.reply("**you can only set music volume if music is playing.**");
 }
 break;
 
 		case "help":
+							const embed1 = new Discord.RichEmbed()
+
 message.channel.send(`
 #User
 **${prefix}userinfo** [Username or blank] : displays info for the selected user or for message sender if arguments are not provided
-
 #Music
 **${prefix}play** [Song Name Or Blank]": Plays a Song Or if Arguments are Not Provided Plays The First Song in The Queue
-
 **${prefix}skip** : Skips The Current Song
-
 **${prefix}queue** : displays Current Queue
-
 **${prefix}queue remove** [Song Number] : Removes Chosen Song From The Queue
-
 **${prefix}queue clear**: Removes All Songs From The Queue
-
 **${prefix}queue shuffle** : Shuffles The Current Queue
-
 **${prefix}repeat**: Plays Current Song Again
-
 **${prefix}stop** : Stops Playing Music And Deletes All Songs in The Queue
-
 **${prefix}yt** [Search Term] : Searches The YouTube and Returns First 5 Results
-
 **${prefix}add** [Search Result Number] : adds a Song From YouTube Search To The Queue
-
 **${prefix}vol** [percentage] : Sets The Volume of The Music To Given Percentage
 `);
+		message.channel.send(embed1);
+
 break;
 
 		case "commands":
 message.channel.send(`
 #User
 **${prefix}userinfo** [Username or blank] : displays info for the selected user or for message sender if arguments are not provided
-
 #Music
 **${prefix}play** [Song Name Or Blank]": Plays a Song Or if Arguments are Not Provided Plays The First Song in The Queue
-
 **${prefix}skip** : Skips The Current Song
-
 **${prefix}queue** : displays Current Queue
-
 **${prefix}queue remove** [Song Number] : Removes Chosen Song From The Queue
-
 **${prefix}queue clear**: Removes All Songs From The Queue
-
 **${prefix}queue shuffle** : Shuffles The Current Queue
-
 **${prefix}repeat**: Plays Current Song Again
-
 **${prefix}stop** : Stops Playing Music And Deletes All Songs in The Queue
-
 **${prefix}yt** [Search Term] : Searches The YouTube and Returns First 5 Results
-
 **${prefix}add** [Search Result Number] : adds a Song From YouTube Search To The Queue
-
 **${prefix}vol** [percentage] : Sets The Volume of The Music To Given Percentage
 `);
 break;
