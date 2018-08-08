@@ -277,7 +277,7 @@ break;
 
 		case "help":
 
-message.channel.send(
+message.channel.send(`
 							const embed1 = new Discord.RichEmbed()
 
 #User
@@ -296,7 +296,7 @@ message.channel.send(
 **${prefix}vol** [percentage] : Sets The Volume of The Music To Given Percentage
 		message.channel.send(embed1);
 
-);
+`);
 
 break;
 
